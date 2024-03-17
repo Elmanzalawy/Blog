@@ -16,6 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
+
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -26,6 +27,11 @@
                     </div>
                 </header>
             @endif
+
+
+            {{-- <div class="container mt-4">
+                @yield('content')
+              </div> --}}
 
             <!-- Page Content -->
             <main>

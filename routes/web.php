@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\PostController;
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,28 +15,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('guest');
+// });
 
 
 
 
+Route::get('/', [PostController::class, 'guest'])->name('guest');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
+
+Route::get('/posts/comment', [PostController::class, 'comment'])->name('posts.comment');
+
+
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::get('/', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
     Route::get('/posts/{posts}/edit', [PostController::class,'edit'])->name('posts.edit');
 
-    Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
 
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 

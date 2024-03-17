@@ -33,14 +33,7 @@
             <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$posts->description}}</textarea>
           </div>
 
-          <div class="container">
-            <p>Post Creator</p>
-        <select class="form-select" aria-label="Default select example">
-            @foreach ($users as $user)
-            <option value="{{$user->id}}">{{$user->name}}</option>
-            @endforeach
-        </select>
-    </div>
+
 
 
         <button type="submit" class="btn btn-primary">Update</button

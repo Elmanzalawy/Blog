@@ -21,7 +21,7 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Posted By</th>
-        <th scope="col">Creeated At</th>
+        <th scope="col">Created At</th>
         <th scope="col">Actions</th>
 
       </tr>

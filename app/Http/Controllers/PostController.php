@@ -16,6 +16,18 @@ class PostController extends Controller
         return view('posts.index', ['posts' => $postsFromDB]);
     }
 
+    public function dashboard()
+    {
+        $postsFromDB = Post::all();
+        return view('dashboard', ['posts' => $postsFromDB]);
+    }
+
+    public function guest()
+    {
+        $postsFromDB = Post::all();
+        return view('guest', ['posts' => $postsFromDB]);
+    }
+
     /// Show
         public function show($PostId)
         {
@@ -31,30 +43,32 @@ class PostController extends Controller
             return view('posts.create', ['users'=> $users ]);
     }
 
-    /// Store
-        public function store()
-        {
 
-        // request validation
-        request()->validate([
-            'title' => ['required', 'min:5'],
-            'description' => ['required', 'min:10'],
-            'posted_by' => ['required', 'exists:users,id'],
-        ]);
-        // 1- get the user data
-            $data = request()->all();
-            $title = request()->title;
-            $description = request()->description;
-            $posted_by = request()->posted_by;
-            // dd($title, $description, $posted_by);
-        //2- store the user data in database
-            Post::create([
-                'title'=> $title,
-                'description'=> $description,
-                'user_id'=> $posted_by,
-        ]);
-        //3- redirection to posts.index
-        return to_route('posts.index');
+
+        public function store(Request $request){
+            $user=auth()->user();
+
+            $userid=$user->id;
+
+            $username=$user->name;
+
+            $email=$user->email;
+
+            $post = new Post;
+
+            $post->title = $request->title;
+
+            $post->description = $request->description;
+
+            $post->user_id =$userid;
+
+            $post->name =$username;
+
+            $post->email =$email;
+
+            $post->save();
+
+            return to_route('posts.index');
         }
 
     /// Edit
@@ -66,27 +80,22 @@ class PostController extends Controller
         }
 
     /// Update
-        public function update($PostId)
+        public function update(Request $request, Post $post)
         {
-            request()->validate([
-                'title' => ['required', 'min:5'],
-                'description' => ['required', 'min:10'],
-                'posted_by' => ['required', 'exists:users,id'],
-            ]);
+            $user=auth()->user();
+            $userid=$user->id;
+            $username=$user->name;
+            $email=$user->email;
+            $post = new Post;
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->user_id =$userid;
+            $post->name =$username;
+            $post->email =$email;
 
-            $title = request()->title;
-            $description = request()->description;
-            $posted_by = request()->posted_by;
+            $post->save();
 
-            $singlePostFromDB = Post::find($PostId);
-
-            $singlePostFromDB->update([
-                'title'=> $title,
-                'description'=> $description,
-                'user_id'=> $posted_by,
-            ]);
-
-        return to_route('posts.show', $PostId);
+        return to_route('posts.show', $post->id);
         }
 
     /// Delete
