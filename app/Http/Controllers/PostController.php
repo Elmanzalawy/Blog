@@ -12,14 +12,25 @@ class PostController extends Controller
     /// Index
     public function index()
     {
+
+
+
         $postsFromDB = Post::all();
         return view('posts.index', ['posts' => $postsFromDB]);
     }
 
     public function dashboard()
     {
-        $postsFromDB = Post::all();
+
+        $postsFromDB = Post::where("user_id", auth()->id())->get();
         return view('dashboard', ['posts' => $postsFromDB]);
+    }
+
+
+    public function comment()
+    {
+        $postsFromDB = Post::all();
+        return view('comment', ['posts' => $postsFromDB]);
     }
 
     public function guest()
@@ -29,9 +40,10 @@ class PostController extends Controller
     }
 
     /// Show
-        public function show($PostId)
+        public function show(Post $posts)
         {
-            $singlePostFromDB = Post::findOrFail($PostId);
+
+            $singlePostFromDB = Post::findOrFail($posts->id);
             return view('posts.show', ['posts' => $singlePostFromDB ]);
         }
 
@@ -74,6 +86,11 @@ class PostController extends Controller
     /// Edit
         public function edit(Post $posts)
         {
+
+            if (auth()->id() != $posts->user_id){
+                return back()->with('error','Unauthorized action');
+            }
+
             $users = User::all();
 
         return view('posts.edit', ['users'=> $users, 'posts'=> $posts]);
@@ -99,10 +116,13 @@ class PostController extends Controller
         }
 
     /// Delete
-        public function destroy($PostId)
+        public function destroy(Post $posts)
         {
+            if (auth()->id() != $posts->user_id){
+                return back()->with('error','Unauthorized action');
+            }
 
-            $posts = Post::find($PostId);
+            $posts = Post::find($posts->id);
             $posts->delete();
 
             return to_route('posts.index');

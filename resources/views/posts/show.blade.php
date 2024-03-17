@@ -26,6 +26,38 @@
     </div>
 
 
+    <form action="{{ route("posts.comment.store", ['post' => $posts->id]) }}" method="POST">
+        @csrf
+        <div class="card mt-5">
+            <label for="exampleFormControlTextarea1" class="form-label card-title card-header">Your Comment</label>
+            <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+        </div>
+        <div class=" mt-3">
+            <button type="submit" class="btn btn-info" style="background-color: gray; color: white; border: gray">Comment</button>
+        </div>
+    </form>
+
+
+
+    {{-- <table>
+        <thead>
+            <tr>
+                <th>Comment</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($posts as $comment)
+                <tr>
+                    <td>{{ $posts->$comment }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table> --}}
+
+
+
+
 @endsection
 
 

@@ -24,11 +24,11 @@
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Title</label>
-      <input name="title" type="text" class="form-control" value="{{old('title')}}" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input  name="title" type="text" class="form-control" value="{{old('title')}}" required id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label" >Description</label>
-        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" {{old('description')}}></textarea>
+        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" required rows="3" {{old('description')}}></textarea>
       </div>
 
 

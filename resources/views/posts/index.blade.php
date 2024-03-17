@@ -40,13 +40,15 @@
 
         <td>
             <a href="{{route('posts.show', $posts->id)}}" type="button" class="btn btn-info">View</a>
-            <a href="{{route('posts.edit', $posts->id)}}" type="button" class="btn btn-primary">Edit</a>
 
+            @if (auth()->id() == $posts->user_id)
+            <a href="{{route('posts.edit', $posts->id)}}" type="button" class="btn btn-primary">Edit</a>
             <form style="display: inline" method="POST" action="{{route('posts.destroy', $posts->id)}}">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
+                @endif
         </td>
 
       </tr>

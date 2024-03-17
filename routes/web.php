@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [PostController::class, 'guest'])->name('guest');
 
-Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
 
-Route::get('/posts/comment', [PostController::class, 'comment'])->name('posts.comment');
 
 
 
@@ -54,5 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/', [PostController::class, 'guest'])->name('guest');
+Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
+Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('posts.comment.store');
 require __DIR__.'/auth.php';
 
