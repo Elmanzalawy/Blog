@@ -26,13 +26,6 @@ class PostController extends Controller
         return view('dashboard', ['posts' => $postsFromDB]);
     }
 
-
-    public function comment()
-    {
-        $postsFromDB = Post::all();
-        return view('comment', ['posts' => $postsFromDB]);
-    }
-
     public function guest()
     {
         $postsFromDB = Post::all();
@@ -54,7 +47,6 @@ class PostController extends Controller
 
             return view('posts.create', ['users'=> $users ]);
     }
-
 
 
         public function store(Request $request){

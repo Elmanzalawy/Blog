@@ -39,21 +39,25 @@
 
 
 
-    {{-- <table>
+    @if ($comments ->isNotEmpty())
+    <table>
         <thead>
             <tr>
                 <th>Comment</th>
-                <!-- Add more columns as needed -->
             </tr>
         </thead>
         <tbody>
-            @foreach ($posts as $comment)
+            @foreach ($comments as $comments)
                 <tr>
-                    <td>{{ $posts->$comment }}</td>
+                    <td>{{ $comments->comments }}</td>
                 </tr>
             @endforeach
         </tbody>
-    </table> --}}
+    </table>
+@else
+    <p>No comments found.</p>
+@endif
+
 
 
 
