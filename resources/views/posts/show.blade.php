@@ -37,30 +37,20 @@
         </div>
     </form>
 
-
-
-    @if ($comments ->isNotEmpty())
-    <table>
-        <thead>
-            <tr>
-                <th>Comment</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($comments as $comments)
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ $comments->comments }}</td>
+                    <th>Comment</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-@else
-    <p>No comments found.</p>
-@endif
-
-
-
-
+            </thead>
+            <tbody>
+                @foreach ($comments as $comment)
+                    <tr>
+                        <td>{{ $comments->comment }} <hr></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
 @endsection
 

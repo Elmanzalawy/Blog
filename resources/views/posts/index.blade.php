@@ -28,36 +28,39 @@
     </thead>
     <tbody>
 
-        @foreach ($posts as $posts)
+        @foreach ($posts as $post)
 
 
       <tr>
-        <td>{{$posts->id}}</td>
-        <td>{{$posts->title}}</td>
-        <td>{{$posts->user->name}}</td>
-        <td>{{$posts->created_at}}</td>
+        <td>{{$post->id}}</td>
+        <td>{{$post->title}}</td>
+        <td>{{$post->user->name}}</td>
+        <td>{{$post->created_at}}</td>
 
 
         <td>
-            <a href="{{route('posts.show', $posts->id)}}" type="button" class="btn btn-info">View</a>
+            <a href="{{route('posts.show', $post->id)}}" type="button" class="btn btn-info">View</a>
 
-            @if (auth()->id() == $posts->user_id)
-            <a href="{{route('posts.edit', $posts->id)}}" type="button" class="btn btn-primary">Edit</a>
-            <form style="display: inline" method="POST" action="{{route('posts.destroy', $posts->id)}}">
+            @if (auth()->id() == $post->user_id)
+            <a href="{{route('posts.edit', $post->id)}}" type="button" class="btn btn-primary">Edit</a>
+            <form style="display: inline" method="POST" action="{{route('posts.destroy', $post->id)}}">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-                @endif
+            @endif
         </td>
 
-      </tr>
-      @endforeach
+    </tr>
+    @endforeach
 
-    </tbody>
-  </table>
+</tbody>
+</table>
 </div>
 </div>
+</div>
+<div>
+    {{ $posts->links() }}
 </div>
 
 @endsection

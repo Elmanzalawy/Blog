@@ -15,8 +15,8 @@ class PostController extends Controller
 
 
 
-        $postsFromDB = Post::all();
-        return view('posts.index', ['posts' => $postsFromDB]);
+        $posts = Post::paginate(3);
+        return view('posts.index', compact('posts'));
     }
 
     public function dashboard()
@@ -28,8 +28,8 @@ class PostController extends Controller
 
     public function guest()
     {
-        $postsFromDB = Post::all();
-        return view('guest', ['posts' => $postsFromDB]);
+        $posts = Post::paginate(3);
+        return view('guest', compact('posts'));
     }
 
     /// Show

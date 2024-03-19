@@ -64,12 +64,12 @@
 
 
 
-        @foreach ($posts as $posts)
+        @foreach ($posts as $post)
         <tr>
-            <td>{{$posts->id}}</td>
-            <td>{{$posts->title}}</td>
-            <td>{{$posts->user->name}}</td>
-            <td>{{$posts->created_at}}</td>
+            <td>{{$post->id}}</td>
+            <td>{{$post->title}}</td>
+            <td>{{$post->user->name}}</td>
+            <td>{{$post->created_at}}</td>
             <td>
                 <i class="fa-regular fa-star"></i>
                 <i class="fa-regular fa-star"></i>
@@ -78,11 +78,11 @@
                 <i class="fa-regular fa-star"></i>
             </td>
             <td>
-                <a href="{{route('posts.show', $posts->id)}}" type="button" class="btn btn-info">View</a>
+                <a href="{{route('posts.show', $post->id)}}" type="button" class="btn btn-info">View</a>
 
             </td>
             <td>
-                <form action="{{ route("posts.show", ['posts' => $posts->id]) }}">
+                <form action="{{ route("posts.show", ['posts' => $post->id]) }}">
                     @csrf
                     <div class="mb-3">
                         <button type="submit" class="btn btn-info" style="background-color: gray; color: white; border: gray">Comment</button>
@@ -96,6 +96,9 @@
     </tbody>
     </table>
     </div>
+</div>
+<div>
+    {{$posts->links()}}
 </div>
 
 
