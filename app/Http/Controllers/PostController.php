@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -49,7 +50,7 @@ class PostController extends Controller
     }
 
 
-        public function store(Request $request){
+        public function store(Request $request, Post $posts){
             $user=auth()->user();
 
             $userid=$user->id;
@@ -72,7 +73,10 @@ class PostController extends Controller
 
             $post->save();
 
-            return to_route('posts.index');
+            $comments = new Post;
+            $comments->comment = $request->get('comment');
+            $comments->save();
+            return to_route('posts.index',compact('posts , comments'));
         }
 
     /// Edit
@@ -120,6 +124,5 @@ class PostController extends Controller
             return to_route('posts.index');
             // print('Are you sure you want to delete')
         }
-
 
 }

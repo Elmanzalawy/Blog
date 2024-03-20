@@ -21,14 +21,12 @@
             <h5 class="card-title">Name: {{$posts->user->name}}</h5>
             <p class="card-text">Email: {{$posts->user->email}}</p>
             <p class="card-text">Id: {{$posts->user->id}}</p>
-
         </div>
     </div>
 
-
     <form action="{{ route("posts.comment.store", ['post' => $posts->id]) }}" method="POST">
         @csrf
-        <div class="card mt-5">
+    <div class="card mt-5">
             <label for="exampleFormControlTextarea1" class="form-label card-title card-header">Your Comment</label>
             <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
         </div>
@@ -37,20 +35,20 @@
         </div>
     </form>
 
-        <table>
-            <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($posts->comments as $comment)
                 <tr>
-                    <th>Comment</th>
+                    <td>{{ $comment->comment }} <hr></td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($comments as $comment)
-                    <tr>
-                        <td>{{ $comments->comment }} <hr></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @endforeach
+        </tbody>
+    </table>
 
 @endsection
 

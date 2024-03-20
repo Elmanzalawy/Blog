@@ -1,21 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Comment;
-use App\Models\Post;
-
-
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, Post $post)
+        public function storeComment(Request $request, $postId)
     {
-        $comments = new Comment();
-        $comments->comment = $request->get('comments');
-        $comments->save();
+        $validatedData = $request->validate([
+            'comment' => 'required',
+        ]);
 
-        return view('posts.show',compact('post , comments'));
+        $comment = new Comment($validatedData);
+        $comment->post_id = $postId;
+        $comment->save();
+        return redirect()->back()->with('success', 'Comment created successfully');
     }
 }

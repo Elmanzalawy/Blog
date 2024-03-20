@@ -53,6 +53,11 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [PostController::class, 'guest'])->name('guest');
 Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
-Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('posts.comment.store');
+// Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('posts.comment.store')
+
+
+
+
+Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('posts.comment.store');
 require __DIR__.'/auth.php';
 
