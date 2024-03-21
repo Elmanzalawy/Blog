@@ -38,10 +38,11 @@
     <table>
         <thead>
             <tr>
-                <th>Comment</th>
+                <th>Comment<br></th>
             </tr>
+
         </thead>
-        <tbody>
+        <tbody ><br>
             @foreach ($posts->comments as $comment)
                 <tr>
                     <td>{{ $comment->comment }} <hr></td>
