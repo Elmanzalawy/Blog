@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\CommentController;
-
-
+use App\Http\Controllers\ProfileController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,15 +30,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get('dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified']);
-Route::get('posts', [PostController::class, 'index']);
-Route::get('posts/create', [PostController::class, 'create']);
-Route::get('posts/{posts}/edit', [PostController::class, 'edit']);
-Route::get('posts', [PostController::class, 'store']);
-Route::get('posts/{posts}', [PostController::class, 'update']);
-Route::get('posts/{posts}', [PostController::class,'destroy']);
-Route::get('guest', [PostController::class,'guest']);
-Route::get('posts/{post}/comments', [CommentController::class,'storeComment']);
+
+// Route::get('dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+
+// Route::get('posts/create', [PostController::class, 'create'])->name('[posts.create');
+
+// Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+
+// Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+
+// Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
+
+// Route::delete('posts/{post}', [PostController::class,'destroy'])->name('posts.destroy');
+
+
+
+
+// Route::get('/', [PostController::class,'guest'])->name('guest');
+
+Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show')->name('posts.show');
+
+// Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('posts.comment.store');
+// require __DIR__.'/auth.php';
 
 
 

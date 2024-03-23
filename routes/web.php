@@ -27,37 +27,37 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
 
-//     Route::get('/dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    // Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
-//     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
-//     Route::get('/posts/{posts}/edit', [PostController::class,'edit'])->name('posts.edit');
-
-
-//     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-
-//     Route::put('/posts/{posts}', [PostController::class, 'update'])->name('posts.update');
-
-//     Route::delete('/posts/{posts}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::get('/posts/{posts}/edit', [PostController::class,'edit'])->name('posts.edit');
 
 
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+    Route::put('/posts/{posts}', [PostController::class, 'update'])->name('posts.update');
 
-// Route::get('/', [PostController::class, 'guest'])->name('guest');
-// Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
+    Route::delete('/posts/{posts}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 
 
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/', [PostController::class, 'guest'])->name('guest');
+Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
 
 
-// Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('posts.comment.store');
-// require __DIR__.'/auth.php';
+
+
+
+Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('posts.comment.store');
+require __DIR__.'/auth.php';
 

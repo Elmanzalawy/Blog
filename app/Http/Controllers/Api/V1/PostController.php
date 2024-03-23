@@ -74,10 +74,10 @@ class PostController extends Controller
 
             $post->save();
 
-            $comments = new Post;
-            $comments->comment = $request->get('comment');
-            $comments->save();
-            return to_route('posts.index',compact('posts , comments'));
+            // $comments = new Post;
+            // $comments->comment = $request->get('comment');
+            // $comments->save();
+            return to_route('posts.index',compact('posts'));
         }
 
     /// Edit
