@@ -74,10 +74,10 @@ class PostController extends Controller
 
             $post->save();
 
-            // $comments = new Post;
-            // $comments->comment = $request->get('comment');
-            // $comments->save();
-            return to_route('posts.index',compact('posts'));
+
+            // return to_route('posts.index',compact('posts'));
+            return back()->with('success', 'Post deleted successfully');
+
         }
 
     /// Edit
@@ -122,8 +122,9 @@ class PostController extends Controller
             $posts = Post::find($posts->id);
             $posts->delete();
 
-            return to_route('posts.index');
+            return back()->with('success', 'Post deleted successfully');
             // print('Are you sure you want to delete')
         }
+
 
 }
