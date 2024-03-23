@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('title'); //varchar title
             $table->text('description');
-            $table->text('user_id'); //text description
             $table->timestamps(); //created at , updated at
         });
     }
