@@ -23,6 +23,30 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="/css/mystyle.css">
 
+        {{-- style --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-*******" crossorigin="anonymous" />
+        <style>
+          .rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            text-align: center;
+          }
+          .rating input {
+            display: none;
+          }
+          .rating label {
+            display: inline-block;
+            padding: 5px;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+          }
+          /* .rating label:hover,
+          .rating label:hover ~ label,
+          .rating input:checked ~ label {
+            color: #ffcc00;
+          } */
+        </style>
     </head>
 
 
@@ -54,10 +78,7 @@
                             <th scope="col">Title</th>
                             <th scope="col">Posted By</th>
                             <th scope="col">Creeated At</th>
-                            <th scope="col">Rate</th>
                             <th scope="col">Actions</th>
-                            <th scope="col">Comments</th>
-
         </tr>
     </thead>
     <tbody>
@@ -71,24 +92,17 @@
             <td>{{$post->user->name}}</td>
             <td>{{$post->created_at}}</td>
             <td>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-            </td>
-            <td>
                 <a href="{{route('posts.show', $post->id)}}" type="button" class="btn btn-info">View</a>
 
             </td>
-            <td>
+            {{-- <td>
                 <form action="{{ route("posts.show", ['posts' => $post->id]) }}">
                     @csrf
                     <div class="mb-3">
                         <button type="submit" class="btn btn-info" style="background-color: gray; color: white; border: gray">Comment</button>
                     </div>
                 </form>
-            </td>
+            </td> --}}
 
         </tr>
         @endforeach
@@ -105,7 +119,35 @@
 
 
 
+<script>
+    const stars = document.querySelectorAll('.rating input');
 
+    stars.forEach((star) => {
+      star.addEventListener('click', function() {
+        resetStars();
+        const clickedStar = this.value;
+        for (let i = 0; i < clickedStar; i++) {
+          stars[i].checked = true;
+          const icon = stars[i].nextElementSibling.querySelector('i');
+          if (icon) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+          }
+        }
+      });
+    });
+
+    function resetStars() {
+      stars.forEach((star) => {
+        star.checked = false;
+        const icon = star.nextElementSibling.querySelector('i');
+        if (icon) {
+          icon.classList.remove('fas');
+          icon.classList.add('far');
+        }
+      });
+    }
+  </script>
 
 
 
