@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\CommentController;
+use App\Http\Controllers\Api\V1\ReviewRatingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-    // Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
@@ -55,7 +56,7 @@ Route::get('/', [PostController::class, 'guest'])->name('guest');
 Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
 
 
-
+Route::post('review-store', [ReviewRatingController::class, 'reviewstore' ])->name('review.store');
 
 
 Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('posts.comment.store');
