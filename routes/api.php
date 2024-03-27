@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\V1\PostController;
-use App\Http\Controllers\Api\V1\CommentController;
+use App\Http\Controllers\dashboard\PostController;
 use App\Http\Controllers\ProfileController;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,10 +22,33 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 
-Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show')->name('posts.show');
+
+
+
+
+    Route::delete('/posts/{posts}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/', [PostController::class, 'guest'])->name('guest');
+Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show');
+
+
+
+
+require __DIR__.'/auth.php';
 
 
 

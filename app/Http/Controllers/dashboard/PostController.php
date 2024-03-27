@@ -19,20 +19,20 @@ class PostController extends Controller
 
 
         $posts = Post::paginate(3);
-        return view('posts.index', compact('posts'));
+        return response()->json($posts);
     }
 
     public function dashboard()
     {
 
         $postsFromDB = Post::where("user_id", auth()->id())->get();
-        return view('dashboard', ['posts' => $postsFromDB]);
+        return response()->json($postsFromDB);
     }
 
     public function guest()
     {
         $posts = Post::paginate(3);
-        return view('guest', compact('posts'));
+        return response()->json($posts);
     }
 
     /// Show
@@ -40,16 +40,11 @@ class PostController extends Controller
         {
 
             $singlePostFromDB = Post::findOrFail($posts->id);
-            return view('posts.show', ['posts' => $singlePostFromDB ]);
+            return response()->json($singlePostFromDB);
         }
 
     /// Create
-        public function create()
-        {
-            $users = User::all();
 
-            return view('posts.create', ['users'=> $users ]);
-    }
 
 
         public function store(Request $request, Post $posts){
@@ -69,9 +64,9 @@ class PostController extends Controller
 
             $post->user_id =$userid;
 
-            // $post->name =$username;
+            $post->name =$username;
 
-            // $post->email =$email;
+            $post->email =$email;
 
             $post->save();
 
@@ -82,17 +77,7 @@ class PostController extends Controller
         }
 
     /// Edit
-        public function edit(Post $posts)
-        {
 
-            if (auth()->id() != $posts->user_id){
-                return back()->with('error','Unauthorized action');
-            }
-
-            $users = User::all();
-
-        return view('posts.edit', ['users'=> $users, 'posts'=> $posts]);
-        }
 
     /// Update
         public function update(Request $request, Post $post)
