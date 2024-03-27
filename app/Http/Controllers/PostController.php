@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers;
 
-// use App\Http\Controllers\Api\V1\ReviewRating;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -53,7 +52,7 @@ class PostController extends Controller
     }
 
 
-        public function store(Request $request, Post $posts){
+        public function store(Request $request){
             $user=auth()->user();
 
             $userid=$user->id;
@@ -77,7 +76,6 @@ class PostController extends Controller
             $post->save();
 
 
-            // return to_route('posts.index',compact('posts'));
             return back()->with('success', 'Post deleted successfully');
 
         }

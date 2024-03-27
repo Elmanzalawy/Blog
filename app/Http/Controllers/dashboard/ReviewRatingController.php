@@ -1,8 +1,9 @@
 <?php
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\ReviewRating;
 
@@ -13,9 +14,13 @@ class ReviewRatingController extends Controller
         $review = new ReviewRating();
         $review->comments = $request->comment;
         $review->star_rating = $request->rating;
-        // $review->user_id = Auth::user()->id;
+        $review->user_id = Auth::user()->id;
         $review->save();
 
         return redirect()->back()->with('success', 'Comment created successfully');
     }
+
+
+
+
 }

@@ -1,7 +1,6 @@
 <?php
-use App\Http\Controllers\Api\V1\PostController;
-use App\Http\Controllers\Api\V1\CommentController;
-use App\Http\Controllers\Api\V1\ReviewRatingController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewRatingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +58,5 @@ Route::get('/posts/{posts}', [PostController::class, 'show'])->name('posts.show'
 Route::post('review-store', [ReviewRatingController::class, 'reviewstore' ])->name('review.store');
 
 
-Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('posts.comment.store');
 require __DIR__.'/auth.php';
 

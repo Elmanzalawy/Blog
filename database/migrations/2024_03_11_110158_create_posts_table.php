@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); //varchar title
+            $table->string('title');
             $table->text('description');
-            $table->text('user_id'); //text description
-            $table->timestamps(); //created at , updated at
+            $table->text('name');
+            $table->text('email');
+            $table->text('user_id');
+            $table->timestamps();
         });
     }
 

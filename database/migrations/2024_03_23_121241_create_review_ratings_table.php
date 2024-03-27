@@ -16,6 +16,8 @@ class CreateReviewRatingsTable extends Migration
             $table->longText('comments')->nullable();
             $table->integer('star_rating');
             $table->enum('status', ['active', 'deactive']);
+            // $table->text('post_id');
+            $table->text('user_id');
             $table->timestamps();
         });
     }
