@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
-use App\Models\User;
+
 
 class ReviewRating extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        // 'post_id',
+        'post_id',
         'user_id',
     ];
 
@@ -25,3 +24,15 @@ class ReviewRating extends Model
         return $this->belongsTo(User::class);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
