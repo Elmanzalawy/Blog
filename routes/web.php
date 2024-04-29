@@ -21,12 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
-
-
-
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [PostController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');

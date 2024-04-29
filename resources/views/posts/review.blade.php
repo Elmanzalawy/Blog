@@ -7,6 +7,8 @@
          height: 46px;
          padding: 0 10px;
          }
+
+
          .rate:not(:checked) > input {
          position:absolute;
          display: none;

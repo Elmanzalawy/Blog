@@ -30,11 +30,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-
-
-
     Route::delete('posts/{posts}', [PostController::class, 'destroy'])->name('posts.destroy');
-
 
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');

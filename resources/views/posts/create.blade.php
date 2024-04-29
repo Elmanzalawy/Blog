@@ -6,15 +6,7 @@
 
 
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
 
 <!-- Create Post Form -->
 
@@ -24,12 +16,22 @@
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Title</label>
-      <input  name="title" type="text" class="form-control" value="{{old('title')}}" required id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input  name="title" type="text"  value="{{old('title')}}" aria-describedby="emailHelp" class="form-control
+      @if ($errors->has('title')) is-invalid @endif">
+      @if ($errors->has('title'))
+      <span class="alert-danger" style="color: red">{{$errors->first('title')}}</span>
+      @endif
+
+
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label" >Description</label>
-        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" required rows="3" {{old('description')}}></textarea>
+        <textarea name="description" value="{{old('description')}}  id="exampleFormControlTextarea1"  {{old('description')}} class="form-control @if ($errors->has('description')) is-invalid @endif" "> </textarea>
+        @if ($errors->has('description'))
+        <span class="alert-danger" style="color: red">{{$errors->first('description')}}</span>
+        @endif
       </div>
+
 
 
 

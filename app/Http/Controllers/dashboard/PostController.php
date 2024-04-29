@@ -47,31 +47,38 @@ class PostController extends Controller
 
 
 
-        public function store(Request $request, Post $posts){
-            $user=auth()->user();
+    public function store(Request $request, Post $posts){
 
-            $userid=$user->id;
+        $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+        ]);
 
-            $username=$user->name;
+        $user=auth()->user();
 
-            $email=$user->email;
+        $userid=$user->id;
 
-            $post = new Post;
+        $username=$user->name;
 
-            $post->title = $request->title;
+        $email=$user->email;
 
-            $post->description = $request->description;
+        $post = new Post;
 
-            $post->user_id =$userid;
+        $post->title = $request->title;
 
-            $post->name =$username;
+        $post->description = $request->description;
 
-            $post->email =$email;
+        $post->user_id =$userid;
 
-            $post->save();
+        $post->name =$username;
 
+        $post->email =$email;
 
-            // return to_route('posts.index',compact('posts'));
+        $post->save();
+
+        $request->session()->flash('status','Post was successfully created!');
+
+        // return to_route('posts.index',compact('posts'));
             return back()->with('success', 'Post deleted successfully');
 
         }
